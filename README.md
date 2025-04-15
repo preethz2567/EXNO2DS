@@ -25,163 +25,24 @@ STEP 7: Use cross tabulation method to quantitatively analyze the relationship b
 
 STEP 8: Use heatmap method of representation to show relationships between two variables, one plotted on each axis.
 
-## CODIND AND OUTPUT
+## CODING AND OUTPUT
+ 
+ ![Screenshot 2025-04-13 220451](https://github.com/user-attachments/assets/36a5ca52-8699-4a62-b12f-4ac74decb17a)
+ ![Screenshot 2025-04-13 220505](https://github.com/user-attachments/assets/7dc98210-2c86-4fc9-9f60-53c1db954d55)
+ ![Screenshot 2025-04-13 220519](https://github.com/user-attachments/assets/8be27de9-33bc-4e76-9308-459471d24f16)
+ ![Screenshot 2025-04-13 220534](https://github.com/user-attachments/assets/623b5204-c156-4e30-963a-8cc3b34b3a64)
+ ![Screenshot 2025-04-13 220550](https://github.com/user-attachments/assets/7f7a2b63-0faa-4cbe-8492-1660a6dfbb9c)
+ ![Screenshot 2025-04-13 220604](https://github.com/user-attachments/assets/5afe13ab-fdf3-4168-bca3-d39f780175ff)
+ ![Screenshot 2025-04-13 220621](https://github.com/user-attachments/assets/25219937-56df-45c5-ad57-339c2c684eaf)
+ ![Screenshot 2025-04-13 220635](https://github.com/user-attachments/assets/15a183e7-1706-44df-92ee-2a7755283535)
+ ![Screenshot 2025-04-13 220645](https://github.com/user-attachments/assets/8fdb670e-125b-4c45-925b-15d482b032bd)
+ ![Screenshot 2025-04-13 220657](https://github.com/user-attachments/assets/72a6a308-5058-499a-a3df-7e9b74a13d77)
+ ![Screenshot 2025-04-13 220707](https://github.com/user-attachments/assets/c244bb4d-9fef-41a4-9021-181e45026746)
+ ![Screenshot 2025-04-13 220717](https://github.com/user-attachments/assets/498b1998-b924-4c99-a554-ba558a4b5467)
+ ![Screenshot 2025-04-13 220728](https://github.com/user-attachments/assets/8a54e1cf-b958-4b91-815d-2cfdf3ef1e18)
+ ![Screenshot 2025-04-13 221027](https://github.com/user-attachments/assets/f750e80a-c78f-4fd4-8d43-2dad778138d3)
+ ![Screenshot 2025-04-13 221048](https://github.com/user-attachments/assets/015d746f-0034-4626-994c-9bbab81f5bd7)
 
-``` python
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-```
-``` python
-
-dt=pd.read_csv("/content/titanic_dataset (2).csv")
-
-```
-``` python
-
-dt
-
-```
-![image](https://github.com/user-attachments/assets/fe347b8b-e399-4bee-818a-94229969ebcb)
-
-``` python
-
-dt.info()
-
-```
-![image](https://github.com/user-attachments/assets/d6ce9da2-929b-4b80-9789-6f12c86beae5)
-
-``` python
-
-dt.shape
-
-```
-![image](https://github.com/user-attachments/assets/130d97ab-1edd-41d8-890d-dc31e092cdd9)
-
-``` python
-
-dt.set_index("PassengerId",inplace=True)
-dt.describe()
-
-```
-![image](https://github.com/user-attachments/assets/fcdfaa8f-1b65-4fbd-9895-50a2c5ca6d85)
-
-``` python
-
-dt.nunique()
-
-```
-
-![image](https://github.com/user-attachments/assets/cfee16df-6e3d-4871-9239-5c0bd3b73286)
-
-``` python
-
-dt["Survived"].value_counts()
-
-```
-![image](https://github.com/user-attachments/assets/908d4098-c5e5-4155-9172-ec2ad1ddf9a2)
-
-``` python
-
-per=(dt["Survived"].value_counts()/dt.shape[0]*100).round(2)
-per
-
-```
-![image](https://github.com/user-attachments/assets/b8440694-07cf-4af3-beef-fd7b83e7411f)
-
-``` python
-
-sns.countplot(data=dt,x="Survived")
-
-```
-![image](https://github.com/user-attachments/assets/3dfbbeae-76a3-4066-a749-6f22041aebfb)
-
-``` python
-
-dt
-
-```
-![image](https://github.com/user-attachments/assets/cce767b8-6633-44a3-90d8-0b2222bf8a5c)
-
-``` python
-
-dt.Pclass.unique()
-
-```
-![image](https://github.com/user-attachments/assets/7c17f93a-4050-47f3-a4a4-66943be1eeac)
-
-``` python
-
-dt.rename(columns = {'Sex':'Gender'},inplace = True)
-
-```
-``` python
-
-sns.catplot(x="Gender",col="Survived",kind="count",data=dt)
-
-```
-![image](https://github.com/user-attachments/assets/43ed0bc5-8377-485e-b6b3-341f6726e0ea)
-
-``` python
-
-sns.catplot(x='Survived',hue="Gender",data=dt,kind="count")
-
-```
-![image](https://github.com/user-attachments/assets/2b11e8e6-3481-4a9a-80ae-756e1b9364bf)
-
-
-``` python
-
-dt.boxplot(column="Age",by="Survived")
-
-```
-![image](https://github.com/user-attachments/assets/57397b61-c989-4628-b51f-b30dfdd44935)
-
-``` python
-
-sns.scatterplot(x=dt["Age"],y=dt["Fare"])
-
-```
-![image](https://github.com/user-attachments/assets/28271ece-f6c1-49a1-a58b-d7cfef115806)
-
-``` python
-
-sns.jointplot(x="Age",y="Fare",data=dt)
-
-```
-![image](https://github.com/user-attachments/assets/e037e883-2c38-48a8-bd32-4eba5dc5748f)
-
-``` python
-
-fig,ax1 = plt.subplots(figsize=(8,5))
-pt=sns.boxplot(ax=ax1,x='Pclass',y='Age',hue='Gender',data=dt)
-
-```
-![image](https://github.com/user-attachments/assets/7ea27e2b-e518-4d8d-bba4-7101c08aa23e)
-
-``` python
-
-sns.catplot(data=dt,col="Survived",x="Gender",hue="Pclass",kind="count")
-
-```
-![image](https://github.com/user-attachments/assets/a54b2fda-11aa-4c75-bb58-9d78e2eb3414)
-
-``` python
-
-import seaborn as sns
-corr=df.corr()
-sns.heatmap(corr,annot=True)
-
-```
-``` python
-
-sns.pairplot(dt)
-
-```
-![image](https://github.com/user-attachments/assets/715ea8e6-5b13-4772-ab80-be5703e69b41)
 
 
 
